@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config,Csv
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,8 +44,15 @@ INSTALLED_APPS = [
     'awewards',
     'bootstrap3',
     'crispy_forms',
+    'cloudinary',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+cloudinary.config(
+    cloud_name='dattmqmzd',
+    api_key='174211532968223',
+    api_secret='tElrLM-9H9WUbxA-0FpraDeDLwk',
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
