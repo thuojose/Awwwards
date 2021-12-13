@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.contrib.auth.views import LogoutView
+from .forms import *
 
 # Create your views here.
 def register(request):
@@ -42,4 +43,18 @@ def profile(request):
         my_projects = Projects.objects.filter(uploader=current_user)
         my_profile = Profile.objects.get(user_id=current_user)
     return render(request, 'profile.html', locals())
+
+@login_required(login_url='/accounts/login')
+def upload_form(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = UploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = form.save(commit=False)
+            image.uploaded_by = current_user
+            image.save()
+            return redirect('home')
+    else:
+        form = UploadForm()
+    return render(request, 'post.html', {'uploadform': form})
 
