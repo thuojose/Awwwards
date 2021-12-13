@@ -23,8 +23,9 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-     path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('', include('awewards.urls')),
     path('accounts/logout/', auth_views.LogoutView, {'next_page': '/'}, name='logout'),
     path('logout/', views.logout, name='logout'),
+    path('ratings/', include('star_ratings.urls', namespace='ratings')),
 ]
