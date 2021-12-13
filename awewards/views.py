@@ -72,4 +72,10 @@ def edit_prof(request):
         form = ProfileForm()
     return render(request, 'profile_edit.html', {'profileform': form})
 
+@login_required(login_url='/accounts/login')
+def search(request):
+    all_projects = Projects.objects.all()
+    parameter = request.GET.get("project")
+    result = Projects.objects.filter(project_name__icontains=parameter)
+    return render(request, 'search.html', locals())
 
