@@ -12,6 +12,7 @@ urlpatterns=[
     path('project/<int:project_id>[0-9]',views.project,name ='project'),
     path('profile/',views.profile, name='profile'),
     path('post/', views.upload_form, name='post'),
+    path('edit/', views.edit_prof, name='edit'),
 ]
 
 if settings.DEBUG:
