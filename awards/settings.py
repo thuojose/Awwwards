@@ -46,8 +46,16 @@ INSTALLED_APPS = [
     'crispy_forms',
     'cloudinary',
     'star_ratings',
+    'rest_framework',
+    'rest_framework.authtoken',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
 
 cloudinary.config(
     cloud_name='dattmqmzd',
