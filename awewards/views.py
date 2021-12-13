@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm 
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
+from django.contrib.auth.views import LogoutView
 
 # Create your views here.
 def register(request):
@@ -13,3 +14,10 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, 'register.html', locals())
+
+@login_required(login_url='/accounts/login')
+def home(request):
+    current_user = request.user
+    all_projects = Projects.objects.all()
+    return render(request, 'index.html', locals())
+
